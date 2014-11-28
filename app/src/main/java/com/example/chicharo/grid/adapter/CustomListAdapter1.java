@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-public class CustomListAdapter0 extends BaseAdapter {
+public class CustomListAdapter1 extends BaseAdapter {
 
     private Activity activity;
     private LayoutInflater inflater;
@@ -28,7 +28,7 @@ public class CustomListAdapter0 extends BaseAdapter {
 
     //ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter0(Activity activity, List<Movie> movieItems) {
+    public CustomListAdapter1(Activity activity, List<Movie> movieItems) {
         this.activity = activity;
         this.movieItems = movieItems;
         int intGetCount = getCount();
@@ -52,12 +52,11 @@ public class CustomListAdapter0 extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        listGenreStr = new ArrayList<String>();
-        Log.d("getView",String.valueOf(position));
-        /*if (inflater == null)*/
+        //Log.d("getView",String.valueOf(position));
+        if (inflater == null)
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        /*if (convertView == null)*/
+        if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row, null);
 
         /*if (imageLoader == null)
@@ -76,25 +75,22 @@ public class CustomListAdapter0 extends BaseAdapter {
         //thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
         // title
-        title.setText("Marina");
+        title.setText(m.getTitle());
 
         // rating
-        rating.setText("Rating: " + String.valueOf(5));
+        rating.setText("Rating: " + String.valueOf(m.getRating()));
 
         // genre
-        listGenreStr.add("sexy");
-        listGenreStr.add("froot");
         String genreStr = "";
-        for (String str : listGenreStr) {
+        for (String str : m.getGenre()) {
             genreStr += str + ", ";
         }
         genreStr = genreStr.length() > 0 ? genreStr.substring(0,
                 genreStr.length() - 2) : genreStr;
         genre.setText(genreStr);
-        listGenreStr.clear();
 
         // release year
-        year.setText(String.valueOf(2014));
+        year.setText(String.valueOf(m.getYear()));
 
         return convertView;
     }

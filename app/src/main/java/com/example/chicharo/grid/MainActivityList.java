@@ -1,7 +1,12 @@
 package com.example.chicharo.grid;
 
-import com.example.chicharo.grid.adapter.CustomListAdapter0;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.chicharo.grid.adapter.CustomListAdapter1;
 import com.example.chicharo.grid.model.Movie;
+import com.example.chicharo.grid.app.AppController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +18,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivityList extends Activity {
     // Log tag
@@ -23,44 +31,47 @@ public class MainActivityList extends Activity {
     // Movies json url
     private static final String url = "http://api.androidhive.info/json/movies.json";
     private ProgressDialog pDialog;
-    private List<Movie> movieList = new ArrayList<Movie>();
+    private List<Movie> movieList;
     private ListView listView;
-    private CustomListAdapter0 adapter;
-    private String eddgaaaaaarrrrrrrrrrrrrrrrrrrrrrrr="rulzzzzzz";
+    private CustomListAdapter1 adapter;
+    JsonArrayRequest movieReq;
+    private String eddgaaaaaarrrrrrrrrrrrrrrrrrrrrrrrr="rulzzzzzz";
     private String aaaasdfa;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.activity = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list);
+        movieList = new ArrayList<Movie>();
+        //AppController.getInstance().cancelPendingRequests(movieReq);
         Log.d("ActivityList","onCreate");
         /*if (!movieList.isEmpty()) {
             Log.d("ActivityList", "cleaning movieList");
             movieList.clear();
         }*/
-        ArrayList<String> genre = new ArrayList<String>();
-        genre.add("sexy");
-        genre.add("froot");
-        Movie movie = new Movie("Marina",2010,6.76,genre);
-        movieList.add(movie);
-        listView = (ListView)findViewById(R.id.list);
+        //ArrayList<String> genre = new ArrayList<String>();
+        //genre.add("sexy");
+        //genre.add("froot");
+        //Movie movie = new Movie("Marina",2010,6.76,genre);
+        //movieList.add(movie);
+
         //listView.setAdapter(new ArrayAdapter<String>(this,
         //        android.R.layout.simple_list_item_1,genre));
-
-        listView.setAdapter(new CustomListAdapter0(this,movieList));
 
         pDialog = new ProgressDialog(this);
 
         // Showing progress dialog before making http request
-        //pDialog.setMessage("Loading.....kk");
-        //pDialog.show();
+        pDialog.setMessage("Loading.....kk");
+        pDialog.show();
 
         // changing action bar color
         getActionBar().setBackgroundDrawable(
-                new ColorDrawable(Color.parseColor("#655342")));
+                new ColorDrawable(Color.parseColor("#655321")));
 
         // Creating volley request obj
-        /*JsonArrayRequest movieReq = new JsonArrayRequest(url,
+        movieReq = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -68,9 +79,11 @@ public class MainActivityList extends Activity {
                         hidePDialog();
 
                         // Parsing json
-                        for (int i = 0; i < 3; i++) { //response.length()
+                        for (int i = 0; i < 7; i++) { //response.length()
 
                             try {
+                                String IsEmpty= String.valueOf(movieList.isEmpty());
+                                Log.d("movieList3",IsEmpty);
                                 JSONObject obj = response.getJSONObject(i);
                                 Movie movie = new Movie();
                                 movie.setTitle(obj.getString("title"));
@@ -89,8 +102,8 @@ public class MainActivityList extends Activity {
 
                                 // adding movie to movies array
                                 movieList.add(movie);
-                                //String IsEmpty= String.valueOf(movieList.isEmpty());
-                                //Log.d("movieList4",IsEmpty);
+                                IsEmpty= String.valueOf(movieList.isEmpty());
+                                Log.d("movieList4",IsEmpty);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -98,13 +111,15 @@ public class MainActivityList extends Activity {
                             }
 
                         }
+                        listView = (ListView)findViewById(R.id.list);
+                        listView.setAdapter(new CustomListAdapter1(activity,movieList));
 
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data
 
                         //adapter.notifyDataSetChanged();// WTF?
-                        //String isEmpty= String.valueOf(movieList.isEmpty());
-                        //Log.d("movieList5",isEmpty);
+                        String isEmpty= String.valueOf(movieList.isEmpty());
+                        Log.d("movieList5",isEmpty);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -113,16 +128,16 @@ public class MainActivityList extends Activity {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 hidePDialog();
             }
-        });*/
-        //String IsEmpty2= String.valueOf(movieList.isEmpty());
-        //Log.d("movieList1",IsEmpty2);
+        });
+        String IsEmpty2= String.valueOf(movieList.isEmpty());
+        Log.d("movieList1",IsEmpty2);
 
         //IsEmpty2= String.valueOf(movieList.isEmpty());
         //Log.d("movieList2",IsEmpty2);
         // Adding request to request queue
-        //AppController.getInstance().addToRequestQueue(movieReq);
-        //IsEmpty2= String.valueOf(movieList.isEmpty());
-        //Log.d("movieList3",IsEmpty2);
+        AppController.getInstance().addToRequestQueue(movieReq);
+        IsEmpty2= String.valueOf(movieList.isEmpty());
+        Log.d("movieList2",IsEmpty2);
 
     }
 
