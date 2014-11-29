@@ -3,7 +3,7 @@ package com.example.chicharo.grid.model;
 import java.util.ArrayList;
 
 public class Movie {
-    private String title;
+    private String title,thumbnailUrl;
     private int year;
     private double rating;
     private ArrayList<String> genre;
@@ -11,10 +11,10 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String name, int year, double rating,
+    public Movie(String name, String thumbnailUrl, int year, double rating,
                  ArrayList<String> genre) {
         this.title = name;
-        //this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailUrl = thumbnailUrl;
         this.year = year;
         this.rating = rating;
         this.genre = genre;
@@ -28,13 +28,13 @@ public class Movie {
         this.title = name;
     }
 
-    /*public String getThumbnailUrl() {
+    public String getThumbnailUrl() {
         return thumbnailUrl;
-    }*/
+    }
 
-    /*public void setThumbnailUrl(String thumbnailUrl) {
+    public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
-    }*/
+    }
 
     public int getYear() {
         return year;

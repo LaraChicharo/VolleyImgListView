@@ -1,6 +1,6 @@
 package com.example.chicharo.grid.app;
 
-//import com.example.chicharo.grid.util.LruBitmapCache;
+import com.example.chicharo.grid.util.LruBitmapCache;
 import android.app.Application;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+
 
 public class AppController extends Application {
 
@@ -37,14 +38,14 @@ public class AppController extends Application {
         return mRequestQueue;
     }
 
-    /*public ImageLoader getImageLoader() {
+    public ImageLoader getImageLoader() {
         getRequestQueue();
         if (mImageLoader == null) {
             mImageLoader = new ImageLoader(this.mRequestQueue,
                     new LruBitmapCache());
         }
         return this.mImageLoader;
-    }*/
+    }
 
     public <T> void addToRequestQueue(Request<T> req, String tag) {
         // set the default tag if tag is empty

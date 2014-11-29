@@ -26,7 +26,7 @@ public class CustomListAdapter1 extends BaseAdapter {
     private List<Movie> movieItems;
     private List<String> listGenreStr;
 
-    //ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public CustomListAdapter1(Activity activity, List<Movie> movieItems) {
         this.activity = activity;
@@ -59,10 +59,10 @@ public class CustomListAdapter1 extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row, null);
 
-        /*if (imageLoader == null)
-            imageLoader = AppController.getInstance().getImageLoader();*/
-        //NetworkImageView thumbNail = (NetworkImageView) convertView
-                //.findViewById(R.id.thumbnail);
+        if (imageLoader == null)
+            imageLoader = AppController.getInstance().getImageLoader();
+        NetworkImageView thumbNail = (NetworkImageView) convertView
+                .findViewById(R.id.thumbnail);
         TextView title = (TextView) convertView.findViewById(R.id.title);
         TextView rating = (TextView) convertView.findViewById(R.id.rating);
         TextView genre = (TextView) convertView.findViewById(R.id.genre);
@@ -72,7 +72,7 @@ public class CustomListAdapter1 extends BaseAdapter {
         Movie m = movieItems.get(position);
 
         // thumbnail image
-        //thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
+        thumbNail.setImageUrl(m.getThumbnailUrl(), imageLoader);
 
         // title
         title.setText(m.getTitle());

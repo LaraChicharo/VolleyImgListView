@@ -33,10 +33,7 @@ public class MainActivityList extends Activity {
     private ProgressDialog pDialog;
     private List<Movie> movieList;
     private ListView listView;
-    private CustomListAdapter1 adapter;
     JsonArrayRequest movieReq;
-    private String eddgaaaaaarrrrrrrrrrrrrrrrrrrrrrrrr="rulzzzzzz";
-    private String aaaasdfa;
     private Activity activity;
 
     @Override
@@ -45,12 +42,7 @@ public class MainActivityList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list);
         movieList = new ArrayList<Movie>();
-        //AppController.getInstance().cancelPendingRequests(movieReq);
         Log.d("ActivityList","onCreate");
-        /*if (!movieList.isEmpty()) {
-            Log.d("ActivityList", "cleaning movieList");
-            movieList.clear();
-        }*/
         //ArrayList<String> genre = new ArrayList<String>();
         //genre.add("sexy");
         //genre.add("froot");
@@ -87,7 +79,7 @@ public class MainActivityList extends Activity {
                                 JSONObject obj = response.getJSONObject(i);
                                 Movie movie = new Movie();
                                 movie.setTitle(obj.getString("title"));
-                                //movie.setThumbnailUrl(obj.getString("image")); //obj.getString("image")
+                                movie.setThumbnailUrl(obj.getString("image")); //obj.getString("image")
                                 movie.setRating(((Number) obj.get("rating"))
                                         .doubleValue());
                                 movie.setYear(obj.getInt("releaseYear"));
@@ -129,15 +121,8 @@ public class MainActivityList extends Activity {
                 hidePDialog();
             }
         });
-        String IsEmpty2= String.valueOf(movieList.isEmpty());
-        Log.d("movieList1",IsEmpty2);
-
-        //IsEmpty2= String.valueOf(movieList.isEmpty());
-        //Log.d("movieList2",IsEmpty2);
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(movieReq);
-        IsEmpty2= String.valueOf(movieList.isEmpty());
-        Log.d("movieList2",IsEmpty2);
 
     }
 
