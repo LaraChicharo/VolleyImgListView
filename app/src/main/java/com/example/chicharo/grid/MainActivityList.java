@@ -4,7 +4,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.example.chicharo.grid.adapter.CustomListAdapter1;
+import com.example.chicharo.grid.adapter.CustomListAdapter;
 import com.example.chicharo.grid.model.Movie;
 import com.example.chicharo.grid.app.AppController;
 
@@ -43,15 +43,6 @@ public class MainActivityList extends Activity {
         setContentView(R.layout.activity_main_list);
         movieList = new ArrayList<Movie>();
         Log.d("ActivityList","onCreate");
-        //ArrayList<String> genre = new ArrayList<String>();
-        //genre.add("sexy");
-        //genre.add("froot");
-        //Movie movie = new Movie("Marina",2010,6.76,genre);
-        //movieList.add(movie);
-
-        //listView.setAdapter(new ArrayAdapter<String>(this,
-        //        android.R.layout.simple_list_item_1,genre));
-
         pDialog = new ProgressDialog(this);
 
         // Showing progress dialog before making http request
@@ -104,7 +95,7 @@ public class MainActivityList extends Activity {
 
                         }
                         listView = (ListView)findViewById(R.id.list);
-                        listView.setAdapter(new CustomListAdapter1(activity,movieList));
+                        listView.setAdapter(new CustomListAdapter(activity,movieList));
 
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data

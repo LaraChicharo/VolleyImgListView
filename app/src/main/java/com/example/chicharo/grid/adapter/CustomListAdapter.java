@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
-public class CustomListAdapter1 extends BaseAdapter {
+public class CustomListAdapter extends BaseAdapter {
 
     private Activity activity;
     private LayoutInflater inflater;
@@ -28,7 +28,7 @@ public class CustomListAdapter1 extends BaseAdapter {
 
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListAdapter1(Activity activity, List<Movie> movieItems) {
+    public CustomListAdapter(Activity activity, List<Movie> movieItems) {
         this.activity = activity;
         this.movieItems = movieItems;
         int intGetCount = getCount();
